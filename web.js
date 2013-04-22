@@ -31,7 +31,16 @@ app.get('/*', function(request, response) {
     });
 });
 
-
+app.post('/', function(request, response){
+    console.log("POST RECIEVED");
+    
+    // var url = request.body.url;
+    // console.log("URL: " + url);
+    // response.writeHead(200, {'Content-Type' : 'text/plain'});
+    // //console.log("Github: " + github.gatherRepoInformation(url));
+    // response.write(github.getLanguageFromFiletype(url));
+    response.end();
+});
 
 
 var port = process.env.PORT || 5000;
