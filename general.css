@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+body{
+  font-family: 'Merriweather Sans', sans-serif;
+  min-width: 600px;
+}
+
+h1.logo{
+  font-weight: 400;
+  font-size: 70px;
+  color: #1B9BE0;
+  margin-bottom: 0px;
+}
