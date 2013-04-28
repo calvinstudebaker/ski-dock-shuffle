@@ -1,5 +1,58 @@
+function gatherInfo(){
+	$(".hidden").hide("fast");
+
+	var valid = true;
+	var data = new Object();
+
+	//Gather info from text fields
+	$("input[type=text]").each(function(){
+		var value = $(this).val();
+		if(value == ""){
+			valid = false;
+			$(this).removeClass("highlighted").addClass("error");
+			$(".hidden[problem=fields]").show("fast");
+		}
+		data[this.id] = value;
+	});
+
+	//Gather info from table
+	var times = new Array();
+	$("td.selected").each(function(){
+		times.push($(this).text());
+	});
+	if(times.length == 0){
+		valid = false;
+		$(".hidden[problem=times]").show("fast");
+	}
+	data.times = times;
+	if(!valid) return false;
+
+	//Gather info from drop downs and check boxes
+	$("select").each(function(){
+		var value = $(this).val();
+		data[this.id] = value;
+	});
+	$("input[type=checkbox]").each(function(){
+		var checked = $(this).is(":checked");
+		data[this.id] = checked;
+	});
+
+	return data;
+}
+
 function submitInfo(){
-	alert("clicked");
+	var data = gatherInfo();
+	if(!data){return;}
+
+	$.ajax({
+		type: "POST",
+		url: "/",
+		data: data
+	}).success(function(msg){
+		alert(msg);
+	}).fail(function(jqXHR, status){
+		alert("Failure: " + status);
+	});
 };
 
 function createTimeTable(){
@@ -10,7 +63,7 @@ function createTimeTable(){
 				row++;
 				$(".timeTable").append("<tr class='row"+row+"'></tr>");
 			}
-			$("<td class='hook'>"+element+"</td>").appendTo(".row"+row).click(function(){
+			$("<td>"+element+"</td>").appendTo(".row"+row).click(function(){
 				if($(this).hasClass("selected")){
 					$(this).removeClass("selected");
 				}else{
@@ -33,7 +86,7 @@ $(document).ready(function(){
 	$(".times").hide();
 
 	$("input[type=text]").focusin(function() {
-		$(this).addClass("highlighted");
+		$(this).removeClass("error").addClass("highlighted");
 	}).focusout(function() {
 		$(this).removeClass("highlighted").removeClass("error");
 	});

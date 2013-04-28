@@ -45,8 +45,13 @@ div.left{
 
 div.times{
   float: left;
-  margin-left: 125px;
+  margin-left: 100px;
   margin-bottom: 40px;
+}
+
+div.hidden{
+  display:none;
+  color: #d1333e;
 }
 
 #chooseTimes{
