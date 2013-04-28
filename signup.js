@@ -16,14 +16,16 @@ function createTimeTable(){
 				}else{
 					$(this).addClass("selected");
 				}
+				$("#submit").show("slow");
 			});
 		});
 	});
 };
 
 function showTimeTable(){
-	if($("#roomNumber").val().length > 0 && $("#name").val().length > 0)
+	if($("#roomNumber").val().length > 0 && $("#name").val().length > 0){
 		$(".times").show("slow");
+	}
 };
 
 $(document).ready(function(){
