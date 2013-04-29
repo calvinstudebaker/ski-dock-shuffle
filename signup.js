@@ -81,6 +81,13 @@ function showTimeTable(){
 	}
 };
 
+function switchToSchedule(){
+	$(".content").hide("fast");
+	setTimeout(function() {
+		$(location).attr('href', "/schedule.html");
+	}, 300);
+};
+
 $(document).ready(function(){
 	$(".left").hide();
 	$(".times").hide();
@@ -104,5 +111,9 @@ $(document).ready(function(){
 			$("#onlyWithFriend").prop('checked', false);
 			$("#friendName").val("");
 		}
+	});
+
+	$("#scheduleButton").click(function(){
+		switchToSchedule();
 	});
 });

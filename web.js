@@ -10,7 +10,7 @@ app.get('/*', function(request, response) {
 	console.log("GET RECIEVED");
 
 	var filePath = '.' + request.url;
-    if (filePath == './') filePath = './index.html';
+    if (filePath == './') filePath = './signup.html';
 
     var extension = path.extname(filePath);
     var contentType = 'text/html';
@@ -34,12 +34,7 @@ app.get('/*', function(request, response) {
 app.post('/', function(request, response){
     console.log("POST RECIEVED");
     console.log(request.body);
-    
-    // var url = request.body.url;
-    // console.log("URL: " + url);
-    // response.writeHead(200, {'Content-Type' : 'text/plain'});
-    // //console.log("Github: " + github.gatherRepoInformation(url));
-    // response.write(github.getLanguageFromFiletype(url));
+    var data = request.body;
     response.writeHead(200, {'Content-Type' : 'text/plain'});
     response.write("success");
     response.end();
