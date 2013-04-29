@@ -5,7 +5,7 @@ function gatherInfo(){
 	var data = new Object();
 
 	//Gather info from text fields
-	$("input[type=text]").each(function(){
+	$("input[type=text]:visible").each(function(){
 		var value = $(this).val();
 		if(value == ""){
 			valid = false;
@@ -96,4 +96,13 @@ $(document).ready(function(){
 	$(".left").show("slow");
 	$("#roomNumber").keyup(showTimeTable);
 	$("#name").keyup(showTimeTable);
+	$("#withFriend").change(function(){
+		if($(this).is(":checked")){
+			$(".friendFields").show("fast");
+		}else{
+			$(".friendFields").hide("fast");
+			$("#onlyWithFriend").prop('checked', false);
+			$("#friendName").val("");
+		}
+	});
 });

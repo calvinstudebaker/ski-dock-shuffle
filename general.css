@@ -37,10 +37,13 @@ span.logo{
 div.content{
 	margin-left: 30px;
 	font-size: 19px;
+  height: 580px;
+  overflow: auto;
 }
 
 div.left{
   float: left;
+  margin-left: 3px;
 }
 
 div.times{
@@ -50,7 +53,15 @@ div.times{
 }
 
 div.hidden{
+  margin-top: 15px;
   display:none;
+}
+
+.friendFields{
+  display:none;
+}
+
+.redText{
   color: #d1333e;
 }
 

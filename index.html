@@ -26,15 +26,20 @@
 	   				<option value="waterski">Waterski</option>
 	   				<option value="slalom">Slalom Ski</option>
 	   				<option value="tube">Tube</option>
-	   				<option value="barefoot">Barefoot</option>
+	   				<option value="kneeboard">Kneeboard</option>
 	   			</select><br>
 	   			<input type="checkbox" id="boom" value="Boom">Boom Needed<br>
 	   			<input type="checkbox" id="assist" value="Assist">In-Water Assist Needed<br>
+	   			<input type="checkbox" id="withFriend" value="WithFriend">Go With a Friend<br>
+	   			<div class="friendFields">
+	   				<input type="text" placeholder="friend's name" id="friendName" autocomplete="off"><br>
+	   				<input type="checkbox" id="onlyWithFriend" value="OnlyWithFriend">Only Willing to Go With Friend<br>
+	   				<div class="redText">Make Sure Your Friend Signs<br>up for the Same Times</div>
+	   			</div>
+	   			<div class="hidden redText" problem="fields">Please fill in all fields.</div>
+				<div class="hidden redText" problem="times">Please select at least one<br>time slot.</div>
 	    		<input type="submit" value="Submit" id="submit" display="none"><br>
 				</form>
-
-				<div class="hidden" problem="fields">Please fill in all fields.</div>
-				<div class="hidden" problem="times">Please select at least one<br>time slot.</div>
 			</div>
 			<div class="times">
 				<center>
