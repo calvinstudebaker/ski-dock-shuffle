@@ -69,6 +69,10 @@ div.hidden{
   margin-bottom: 25px;
 }
 
+img{
+  border-radius: 10px;
+}
+
 td{
   background: #f1f1f1;
   border-radius: 4px;
