@@ -38,31 +38,15 @@ function gatherInfo(){
 	});
 
 	return request;
-}
+};
 
 function submitInfoDB(){
-	
 	var request = gatherInfo();
 	if(!request){return;}
 	request.save(null, {
 		success: function(request) {
 			alert("saved to database");
 		}
-	});
-}
-
-function submitInfo(){
-	var data = gatherInfo();
-	if(!data){return;}
-
-	$.ajax({
-		type: "POST",
-		url: "/",
-		data: data
-	}).success(function(msg){
-		alert(msg);
-	}).fail(function(jqXHR, status){
-		alert("Failure: " + status);
 	});
 };
 
