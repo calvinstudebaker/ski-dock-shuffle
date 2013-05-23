@@ -2,7 +2,8 @@ function gatherInfo(){
 	$(".hidden").hide("fast");
 
 	var valid = true;
-	var data = new Object();
+	var request = new Request();
+	//var data = new Object();
 
 	//Gather info from text fields
 	$("input[type=text]:visible").each(function(){
@@ -12,7 +13,8 @@ function gatherInfo(){
 			$(this).removeClass("highlighted").addClass("error");
 			$(".hidden[problem=fields]").show("fast");
 		}
-		data[this.id] = value;
+		request.set(this.id, value);
+		//data[this.id] = value;
 	});
 
 	//Gather info from table
@@ -24,30 +26,34 @@ function gatherInfo(){
 		valid = false;
 		$(".hidden[problem=times]").show("fast");
 	}
-	data.times = times;
+	request.set("times", times);
+	//data.times = times;
 	if(!valid) return false;
 
 	//Gather info from drop downs and check boxes
 	$("select").each(function(){
 		var value = $(this).val();
-		data[this.id] = value;
+		request.set(this.id, value);
+		//data[this.id] = value;
 	});
 	$("input[type=checkbox]").each(function(){
 		var checked = $(this).is(":checked");
-		data[this.id] = checked;
+		request.set(this.id, value);
+		//data[this.id] = checked;
 	});
 
-	return data;
+	return request;
+	//return data;
 }
 
 function submitInfoDB(){
-	Parse.initialize("IVhuqzR7EMSFzeACknVIjmhFquT3y8h1tOMKCTjX", "97Js5WNYJkGKNGCeGWFoetCPHtbtZF2VZgYvobE1");
-	var TestObject = Parse.Object.extend("TestObject");
-	var testObject = new TestObject();
-	testObject.save({foo: "bar"}, {
-	  	success: function(object) {
-	    	alert("yay! it worked");
-	  	}
+	
+	var request = gatherInfo();
+	if(!request){return;}
+	request.save(null, {
+		success: function(request) {
+			alert("saved to database");
+		}
 	});
 }
 
@@ -99,9 +105,11 @@ function switchToSchedule(){
 	}, 300);
 };
 
-$(document).ready(function(){
+$(document).ready(function(){	
 	$(".left").hide();
 	$(".times").hide();
+	Parse.initialize("IVhuqzR7EMSFzeACknVIjmhFquT3y8h1tOMKCTjX", "97Js5WNYJkGKNGCeGWFoetCPHtbtZF2VZgYvobE1");
+	var Request = Parse.Object.extend("Request");
 
 	$("input[type=text]").focusin(function() {
 		$(this).removeClass("error").addClass("highlighted");
