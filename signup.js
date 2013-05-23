@@ -1,9 +1,8 @@
 function gatherInfo(){
 	$(".hidden").hide("fast");
-
+	var Request = Parse.Object.extend("Request");
 	var valid = true;
 	var request = new Request();
-	//var data = new Object();
 
 	//Gather info from text fields
 	$("input[type=text]:visible").each(function(){
@@ -14,7 +13,6 @@ function gatherInfo(){
 			$(".hidden[problem=fields]").show("fast");
 		}
 		request.set(this.id, value);
-		//data[this.id] = value;
 	});
 
 	//Gather info from table
@@ -27,23 +25,19 @@ function gatherInfo(){
 		$(".hidden[problem=times]").show("fast");
 	}
 	request.set("times", times);
-	//data.times = times;
 	if(!valid) return false;
 
 	//Gather info from drop downs and check boxes
 	$("select").each(function(){
 		var value = $(this).val();
 		request.set(this.id, value);
-		//data[this.id] = value;
 	});
 	$("input[type=checkbox]").each(function(){
 		var checked = $(this).is(":checked");
-		request.set(this.id, value);
-		//data[this.id] = checked;
+		request.set(this.id, checked);
 	});
 
 	return request;
-	//return data;
 }
 
 function submitInfoDB(){
@@ -109,7 +103,6 @@ $(document).ready(function(){
 	$(".left").hide();
 	$(".times").hide();
 	Parse.initialize("IVhuqzR7EMSFzeACknVIjmhFquT3y8h1tOMKCTjX", "97Js5WNYJkGKNGCeGWFoetCPHtbtZF2VZgYvobE1");
-	var Request = Parse.Object.extend("Request");
 
 	$("input[type=text]").focusin(function() {
 		$(this).removeClass("error").addClass("highlighted");
