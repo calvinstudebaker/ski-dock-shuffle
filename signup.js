@@ -40,6 +40,17 @@ function gatherInfo(){
 	return data;
 }
 
+function submitInfoDB(){
+	Parse.initialize("IVhuqzR7EMSFzeACknVIjmhFquT3y8h1tOMKCTjX", "97Js5WNYJkGKNGCeGWFoetCPHtbtZF2VZgYvobE1");
+	var TestObject = Parse.Object.extend("TestObject");
+	var testObject = new TestObject();
+	testObject.save({foo: "bar"}, {
+	  	success: function(object) {
+	    	alert("yay! it worked");
+	  	}
+	});
+}
+
 function submitInfo(){
 	var data = gatherInfo();
 	if(!data){return;}

@@ -4,6 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Ski Dock Shuffle</title>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="http://www.parsecdn.com/js/parse-1.2.7.min.js"></script>
 		<script src="./signup.js"></script>
 		<link rel="stylesheet" type="text/css" href="./general.css">
 		<link href='http://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700' rel='stylesheet' type='text/css'>
@@ -18,7 +19,7 @@
   		<div class="content">
   			<div class="left">
 	  			<p>Sign Up Here</p>
-	  			<form action="javascript:void(0)" onsubmit="submitInfo()">
+	  			<form action="javascript:void(0)" onsubmit="submitInfoDB()">
 				<input type="text" placeholder="name" id="name" autocomplete="off"><br>
 	   			<input type="text" placeholder="room number" id="roomNumber" autocomplete="off"><br>
 	   			<select name="activity" id="activity">
