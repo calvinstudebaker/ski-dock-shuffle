@@ -71,7 +71,7 @@ function createTimeTable(){
 };
 
 function showTimeTable(){
-	if($("#roomNumber").val().length > 0 && $("#name").val().length > 0){
+	if($("#roomNumber").val().length > 0 && $("#firstName").val().length > 0 && $("#lastName").val().length > 0){
 		$(".times").show("slow");
 	}
 };
@@ -98,7 +98,8 @@ $(document).ready(function(){
 
 	$(".left").show("slow");
 	$("#roomNumber").keyup(showTimeTable);
-	$("#name").keyup(showTimeTable);
+	$("#firstName").keyup(showTimeTable);
+	$("#lastName").keyup(showTimeTable);
 	$("#withFriend").change(function(){
 		if($(this).is(":checked")){
 			$(".friendFields").show("fast");

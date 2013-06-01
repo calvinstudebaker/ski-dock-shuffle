@@ -20,7 +20,8 @@
   			<div class="left">
 	  			<p>Sign Up Here</p>
 	  			<form action="javascript:void(0)" onsubmit="submitInfoDB()">
-				<input type="text" placeholder="name" id="name" autocomplete="off"><br>
+				<input type="text" placeholder="first name" id="firstName" autocomplete="off"><br>
+				<input type="text" placeholder="last name" id="lastName" autocomplete="off"><br>
 	   			<input type="text" placeholder="room number" id="roomNumber" autocomplete="off"><br>
 	   			<select name="activity" id="activity">
 	   				<option value="wakeboard">Wakeboard</option>
@@ -33,9 +34,9 @@
 	   			<input type="checkbox" id="assist" value="Assist">In-Water Assist Needed<br>
 	   			<input type="checkbox" id="withFriend" value="WithFriend">Go With a Friend<br>
 	   			<div class="friendFields">
-	   				<input type="text" placeholder="friend's name" id="friendName" autocomplete="off"><br>
+	   				<input type="text" placeholder="friend's first name" id="friendFirstName" autocomplete="off"><br>
+	   				<input type="text" placeholder="friend's last name" id="friendLastName" autocomplete="off"><br>
 	   				<input type="checkbox" id="onlyWithFriend" value="OnlyWithFriend">Only Willing to Go With Friend<br>
-	   				<div class="redText">Make Sure Your Friend Signs<br>up for the Same Times as You</div>
 	   			</div>
 	   			<div class="hidden redText" problem="fields">Please fill in all fields.</div>
 				<div class="hidden redText" problem="times">Please select at least one<br>time slot.</div>
