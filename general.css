@@ -156,7 +156,6 @@ input[type="submit"]:active {
   color:#ffffff; 
   margin: 10px 0 10px 0;
   background: #1B9BE0;
-  float:left;
 }
 
 .topBarButton:hover{
