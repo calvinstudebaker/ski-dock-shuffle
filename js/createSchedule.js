@@ -8,7 +8,7 @@ exports.createSchedule = function(){
 
 function startCreateSchedule(requests){
   var timeMap = buildTimeMap(requests);
-  
+  console.log(timeMap);
 };
 
 function buildSchedule(timeMap){
