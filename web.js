@@ -1,6 +1,7 @@
 var express = require('express');
 var fs   = require('fs');
 var path = require('path');
+var createSchedule = require('./js/createSchedule.js')
 
 var app = express.createServer(express.logger());
 
@@ -10,7 +11,9 @@ app.get('/*', function(request, response) {
 	console.log("GET RECIEVED");
 
 	var filePath = '.' + request.url;
-    if (filePath == './') filePath = './signup.html';
+    if (filePath == './') filePath = './html/signup.html';
+
+    console.log(filePath);
 
     var extension = path.extname(filePath);
     var contentType = 'text/html';
@@ -38,6 +41,7 @@ app.post('/', function(request, response){
     response.writeHead(200, {'Content-Type' : 'text/plain'});
     response.write("success");
     response.end();
+    if(data.request == "createSchedule") createSchedule.createSchedule();
 });
 
 

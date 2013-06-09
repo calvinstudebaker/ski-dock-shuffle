@@ -69,6 +69,10 @@ div.hidden{
   margin-bottom: 25px;
 }
 
+#timeMessage{
+  font-size: 13px;
+}
+
 img{
   border-radius: 10px;
 }

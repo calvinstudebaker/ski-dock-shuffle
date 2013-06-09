@@ -3,6 +3,7 @@ function gatherInfo(){
 	var Request = Parse.Object.extend("Request");
 	var valid = true;
 	var request = new Request();
+	var info = new Object();
 
 	//Gather info from text fields
 	$("input[type=text]:visible").each(function(){
@@ -12,7 +13,7 @@ function gatherInfo(){
 			$(this).removeClass("highlighted").addClass("error");
 			$(".hidden[problem=fields]").show("fast");
 		}
-		request.set(this.id, value);
+		info[this.id] = value;
 	});
 
 	//Gather info from table
@@ -30,13 +31,14 @@ function gatherInfo(){
 	//Gather info from drop downs and check boxes
 	$("select").each(function(){
 		var value = $(this).val();
-		request.set(this.id, value);
+		info[this.id] = value;
 	});
 	$("input[type=checkbox]").each(function(){
 		var checked = $(this).is(":checked");
-		request.set(this.id, checked);
+		info[this.id] = checked;
 	});
 
+	request.set("info", info);
 	return request;
 };
 
@@ -50,8 +52,9 @@ function submitInfoDB(){
 	});
 };
 
-function createTimeTable(){
-	$.getJSON("times.json", function(data){
+function createTimeTable(file){
+	$.getJSON(file, function(data){
+		$("tbody").remove();
 		var row = -1;
 		$.each(data.times, function(index, element){
 			if(index % 3 == 0){
@@ -76,13 +79,6 @@ function showTimeTable(){
 	}
 };
 
-function switchToSchedule(){
-	$(".content").hide("fast");
-	setTimeout(function() {
-		$(location).attr('href', "/schedule.html");
-	}, 300);
-};
-
 $(document).ready(function(){	
 	$(".left").hide();
 	$(".times").hide();
@@ -94,7 +90,7 @@ $(document).ready(function(){
 		$(this).removeClass("highlighted").removeClass("error");
 	});
 
-	createTimeTable();
+	createTimeTable("../res/times.json");
 
 	$(".left").show("slow");
 	$("#roomNumber").keyup(showTimeTable);
@@ -103,14 +99,16 @@ $(document).ready(function(){
 	$("#withFriend").change(function(){
 		if($(this).is(":checked")){
 			$(".friendFields").show("fast");
+			$("#timeMessage").show("fast");
+			createTimeTable("../res/times40.json");
 		}else{
 			$(".friendFields").hide("fast");
+			$("#timeMessage").hide("fast");
 			$("#onlyWithFriend").prop('checked', false);
-			$("#friendName").val("");
-		}
-	});
+			$("#friendFirstName").val("");
+			$("#friendLastName").val("");
 
-	$("#scheduleButton").click(function(){
-		switchToSchedule();
+			createTimeTable("../res/times.json");
+		}
 	});
 });

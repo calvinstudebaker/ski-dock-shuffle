@@ -5,11 +5,12 @@
 		<title>Ski Dock Shuffle</title>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="http://www.parsecdn.com/js/parse-1.2.7.min.js"></script>
-		<script src="./signup.js"></script>
-		<link rel="stylesheet" type="text/css" href="./general.css">
+		<script src="../js/general.js"></script>
+		<script src="../js/signup.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/general.css">
 		<link href='http://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700' rel='stylesheet' type='text/css'>
 	</head>
-	<link rel="icon" type="image/png" href="./favicon.ico">
+	<link rel="icon" type="image/png" href="../res/favicon.ico">
 	<body>
 		<div class="header">
 			<input type="button" id="signUpButton" value="Sign Up" class="topBarButton">
@@ -46,6 +47,7 @@
 			<div class="times">
 				<center>
 				<p id="chooseTimes">Choose Available Times</p>
+				<div class="hidden redText" id="timeMessage">Groups require 40 minute slots, but keep in mind this lowers your chance of being successfully scheduled!</div>
 				<table class="timeTable">
 				</table>
 				</center>
