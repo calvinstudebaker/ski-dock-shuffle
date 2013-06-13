@@ -1,6 +1,9 @@
 var https = require('https');
 var querystring = require('querystring');
 
+var bestSchedule;
+var leastUnsatisfied = 500;
+
 //grabs all the sign up requests in the database and creates a schedule out of them
 exports.createSchedule = function(){
   getAllRequests(startCreateSchedule);
@@ -8,30 +11,52 @@ exports.createSchedule = function(){
 
 function startCreateSchedule(requests){
   var timeMap = buildTimeMap(requests);
-  console.log(timeMap);
-  buildSchedule(timeMap);
+  var sortedTimes = sortTimeMap(timeMap);
+  buildSchedule(sortedTimes);
 };
 
-function buildSchedule(timeMap){
-  var sortedTimes = sortTimeMap(timeMap);
-  var schedule = new Object;
-	for(var elem in sortedTimes){
-		if(sortedTimes[elem].requests.length == 1){
-      schedule[sortedTimes[elem].time] = sortedTimes[elem].requests[0];
-      removeRequest(sortedTimes, sortedTimes[elem].requests[0]);
+function buildSchedule(sortedTimes){
+  var changed = true;
+
+  //Assign all the single requested slots
+  while(changed){
+    changed = false;
+    console.log("BEFORE");
+    logSortedTimes(sortedTimes);
+    for(var elem in sortedTimes){
+      if(sortedTimes[elem].requests.length == 1){
+        changed = true;
+        schedule[sortedTimes[elem].time] = sortedTimes[elem].requests[0];
+        removeRequest(sortedTimes, sortedTimes[elem].requests[0]);
+      }
     }
-	}
+    console.log("AFTER");
+    logSortedTimes(sortedTimes);
+  }
+
+  sortedTimes = sortTimeArray(sortedTimes);
+  console.log("SORTING TIMES ARRAY");
+  logSortedTimes(sortedTimes);
+
+  for(var index in sortedTimes){
+    
+  }
 };
 
 function removeRequest(sortedTimes, request){
-  for(var elem in sortedTimes){
-    var requests = sortedTimes[elem].requests;
+  for(var index = 0; index < sortedTimes.length; index++){
+    var requests = sortedTimes[index].requests;
     for(var i = 0; i < requests.length; i++){
       var curr = requests[i];
       if(isEqual(curr, request)){
         requests.splice(i, 1);
         i--;
       }
+    }
+    //Remove element if we cleared out all requests.
+    if(requests.length == 0){
+      sortedTimes.splice(index, 1);
+      index--;
     }
   }
 };
@@ -47,6 +72,25 @@ function sortTimeMap(timeMap){
     var elem = new Object();
     elem.time = time;
     elem.requests = timeMap[time];
+    var added = false;
+    for(var index in sortedTimes){
+      if(sortedTimes[index].requests.length >= elem.requests.length){
+        sortedTimes.splice(index, 0, elem);
+        added = true;
+        break;
+      }
+    }
+    if(!added){
+      sortedTimes.push(elem);
+    }
+  }
+  return sortedTimes;
+}
+
+function sortTimeArray(timeArray){
+  var sortedTimes = new Array();
+  for(var i = 0; i < timeArray.length; i++){
+    var elem = timeArray[i];
     var added = false;
     for(var index in sortedTimes){
       if(sortedTimes[index].requests.length >= elem.requests.length){

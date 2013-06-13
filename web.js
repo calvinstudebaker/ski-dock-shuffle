@@ -25,12 +25,19 @@ app.get('/*', function(request, response) {
 
     fs.readFile(filePath, function(err, content) {
         if (err) {
-            throw err;
+            /*
+            *   TODO: Make sad kitty error page
+            */
+            response.writeHead(404, {'Content-Type' : 'text/html'});
+            response.write("File not found!");
+            console.log("INVALID REQUEST");
+            response.end();
+        }else{
+            response.writeHead(200, {'Content-Type' : contentType});
+            response.write(content);
+            console.log("GET RESPONDED");
+            response.end();
         }
-        response.writeHead(200, {'Content-Type' : contentType});
-        response.write(content);
-        console.log("GET RESPONDED");
-        response.end();
     });
 });
 
