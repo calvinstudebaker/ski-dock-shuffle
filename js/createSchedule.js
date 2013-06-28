@@ -12,10 +12,15 @@ exports.createSchedule = function(){
 function startCreateSchedule(requests){
   var timeMap = buildTimeMap(requests);
   var sortedTimes = sortTimeMap(timeMap);
-  buildSchedule(sortedTimes);
+  var schedule = new Array();
+  var boat1 = new Object();
+  var boat2 = new Object();
+  schedule.push(boat1);
+  schedule.push(boat2);
+  buildSchedule(sortedTimes, schedule);
 };
 
-function buildSchedule(sortedTimes){
+function buildSchedule(sortedTimes, schedule){
   var changed = true;
 
   //Assign all the single requested slots
@@ -26,7 +31,7 @@ function buildSchedule(sortedTimes){
     for(var elem in sortedTimes){
       if(sortedTimes[elem].requests.length == 1){
         changed = true;
-        schedule[sortedTimes[elem].time] = sortedTimes[elem].requests[0];
+        schedule[0][sortedTimes[elem].time] = sortedTimes[elem].requests[0];
         removeRequest(sortedTimes, sortedTimes[elem].requests[0]);
       }
     }
@@ -62,7 +67,7 @@ function removeRequest(sortedTimes, request){
 };
 
 function isEqual(request1, request2){
-  return (request1.firstName == request2.firstName && request1.lastName == request2.lastName && request1.roomNumber == request2.roomNumber);
+  return (request1.firstName == request2.firstName && request1.lastName == request2.lastName && request1.cabin == request2.cabin);
 };
 
 //Insertion sorts the elements in the timeMap by the number of requests for a given time
@@ -112,7 +117,7 @@ function buildTimeMap(requests){
     var request = requests[index];
     for(var timeIndex in request.times){
       var time = request.times[timeIndex];
-      time = time.substring(0, time.indexOf("-"));
+      // time = time.substring(0, time.indexOf("-"));
       if(!timeMap.hasOwnProperty(time)) timeMap[time] = new Array();
       timeMap[time].push(request.info);
     }

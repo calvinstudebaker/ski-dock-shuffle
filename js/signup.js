@@ -37,6 +37,9 @@ function gatherInfo(){
 		var checked = $(this).is(":checked");
 		info[this.id] = checked;
 	});
+	$("input[type=radio]:checked").each(function(){
+		info['timeLength'] = this.value;
+	});
 
 	request.set("info", info);
 	return request;
@@ -56,12 +59,15 @@ function createTimeTable(file){
 	$.getJSON(file, function(data){
 		$("tbody").remove();
 		var row = -1;
-		$.each(data.times, function(index, element){
+		var date = new Date();
+		var weekday = date.getDay();
+		weekday = (weekday+1)%7;
+		$.each(data[weekday], function(index, element){
 			if(index % 3 == 0){
 				row++;
 				$(".timeTable").append("<tr class='row"+row+"'></tr>");
 			}
-			$("<td>"+element+"</td>").appendTo(".row"+row).click(function(){
+			$("<td>"+element.time+"</td>").appendTo(".row"+row).click(function(){
 				if($(this).hasClass("selected")){
 					$(this).removeClass("selected");
 				}else{
@@ -74,7 +80,7 @@ function createTimeTable(file){
 };
 
 function showTimeTable(){
-	if($("#roomNumber").val().length > 0 && $("#firstName").val().length > 0 && $("#lastName").val().length > 0){
+	if($("#cabin").val().length > 0 && $("#firstName").val().length > 0 && $("#lastName").val().length > 0){
 		$(".times").show("slow");
 	}
 };
@@ -93,22 +99,32 @@ $(document).ready(function(){
 	createTimeTable("../res/times.json");
 
 	$(".left").show("slow");
-	$("#roomNumber").keyup(showTimeTable);
+	$("#cabin").keyup(showTimeTable);
 	$("#firstName").keyup(showTimeTable);
 	$("#lastName").keyup(showTimeTable);
-	$("#withFriend").change(function(){
-		if($(this).is(":checked")){
-			$(".friendFields").show("fast");
+	// $("#withFriend").change(function(){
+	// 	if($(this).is(":checked")){
+	// 		$(".friendFields").show("fast");
+	// 		$("#timeMessage").show("fast");
+	// 		createTimeTable("../res/times40.json");
+	// 	}else{
+	// 		$(".friendFields").hide("fast");
+	// 		$("#timeMessage").hide("fast");
+	// 		$("#onlyWithFriend").prop('checked', false);
+	// 		$("#friendFirstName").val("");
+	// 		$("#friendLastName").val("");
+
+	// 		createTimeTable("../res/times.json");
+	// 	}
+	// });
+	$("input[name='timeLength']").change(function(e){
+		if($("#twenty").is(":checked")){
+			$("#timeMessage").hide("fast");
+			createTimeTable("../res/times.json");
+		}else{
 			$("#timeMessage").show("fast");
 			createTimeTable("../res/times40.json");
-		}else{
-			$(".friendFields").hide("fast");
-			$("#timeMessage").hide("fast");
-			$("#onlyWithFriend").prop('checked', false);
-			$("#friendFirstName").val("");
-			$("#friendLastName").val("");
-
-			createTimeTable("../res/times.json");
 		}
 	});
+	
 });

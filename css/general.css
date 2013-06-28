@@ -200,3 +200,7 @@ select:focus{
   outline-width: 3px;
   outline-color: #1B9BE0;
 }
+
+input[type="radio"]{
+  margin-left: 20px;
+}

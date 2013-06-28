@@ -23,22 +23,23 @@
 	  			<form action="javascript:void(0)" onsubmit="submitInfoDB()">
 				<input type="text" placeholder="first name" id="firstName" autocomplete="off"><br>
 				<input type="text" placeholder="last name" id="lastName" autocomplete="off"><br>
-	   			<input type="text" placeholder="room number" id="roomNumber" autocomplete="off"><br>
+	   			<input type="text" placeholder="cabin" id="cabin" autocomplete="off"><br>
 	   			<select name="activity" id="activity">
 	   				<option value="wakeboard">Wakeboard</option>
 	   				<option value="waterski">Waterski</option>
 	   				<option value="slalom">Slalom Ski</option>
 	   				<option value="tube">Tube</option>
 	   				<option value="kneeboard">Kneeboard</option>
+	   				<option value="aquaplane">Aquaplane</option>
 	   			</select><br>
 	   			<input type="checkbox" id="boom" value="Boom">Boom Needed<br>
 	   			<input type="checkbox" id="assist" value="Assist">In-Water Assist Needed<br>
-	   			<input type="checkbox" id="withFriend" value="WithFriend">Go With a Friend<br>
+	   			<!-- <input type="checkbox" id="withFriend" value="WithFriend">Go With a Friend<br>
 	   			<div class="friendFields">
 	   				<input type="text" placeholder="friend's first name" id="friendFirstName" autocomplete="off"><br>
 	   				<input type="text" placeholder="friend's last name" id="friendLastName" autocomplete="off"><br>
 	   				<input type="checkbox" id="onlyWithFriend" value="OnlyWithFriend">Only Willing to Go With Friend<br>
-	   			</div>
+	   			</div> -->
 	   			<div class="hidden redText" problem="fields">Please fill in all fields.</div>
 				<div class="hidden redText" problem="times">Please select at least one<br>time slot.</div>
 	    		<input type="submit" value="Submit" id="submit" display="none"><br>
@@ -47,7 +48,9 @@
 			<div class="times">
 				<center>
 				<p id="chooseTimes">Choose Available Times</p>
-				<div class="hidden redText" id="timeMessage">Groups require 40 minute slots, but keep in mind this lowers your chance of being successfully scheduled!</div>
+				<input type="radio" name="timeLength" value="20" id="twenty" checked> 20 minutes
+				<input type="radio" name="timeLength" value="40" id="forty"> 40 minutes
+				<div class="hidden redText" id="timeMessage">40 minute slots START at these times. This lowers your chance of being successfully scheduled!</div>
 				<table class="timeTable">
 				</table>
 				</center>
