@@ -1,6 +1,4 @@
 Add rules about the shuffle.
-Add data security (don't connect to Parse from client?)
-Add wipeout photo to not found page
 Make room number a drop down menu.
 
 Build a tree.
